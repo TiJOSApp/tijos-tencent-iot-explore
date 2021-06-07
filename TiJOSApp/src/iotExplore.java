@@ -92,10 +92,11 @@ public class iotExplore {
 		String devicePSK = "PQ7Ja8O0/j9Bbm7WdW+TuQ==";
 
 		//腾讯云平台客户端
-		IotExploreMqttClient txClient = IotExploreMqttClient.getInstance(productId, deviceName, devicePSK);
+		IotExploreMqttClient txClient = IotExploreMqttClient.getInstance();
 		
 		//启动连接并设置事件监听
-		txClient.connect(new IotEventListener(txClient));
+		txClient.start(productId, deviceName, devicePSK, new IotEventListener(txClient));
+	
 
 		//通过JSON对象进行设备属性上报
 		JSONObject jobj = new JSONObject();
@@ -125,7 +126,7 @@ public class iotExplore {
 			Delay.msDelay(5000);
 		}
 
-		//txClient.disconnect();
+		//txClient.stop();
 
 	}
 
